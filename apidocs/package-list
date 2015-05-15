@@ -1,0 +1,3 @@
+net.openhft.chronicle.algo.bitset
+net.openhft.chronicle.algo.hashing
+net.openhft.chronicle.algo.locks
