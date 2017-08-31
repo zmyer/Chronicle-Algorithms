@@ -16,6 +16,8 @@
 
 package net.openhft.chronicle.algo.bytes;
 
+import net.openhft.chronicle.core.Jvm;
+
 import java.nio.ByteOrder;
 
 abstract class CharSequenceAccessor
@@ -39,6 +41,10 @@ abstract class CharSequenceAccessor
         initAccessor:
         {
             if (System.getProperty("java.vm.name").contains("HotSpot")) {
+                if (Jvm.isJava9Plus()) {
+                    stringAccessor = Java9HotSpotStringAccessor.INSTANCE;
+                    break initAccessor;
+                }
                 if (System.getProperty("java.version").compareTo("1.7.0_06") >= 0) {
                     stringAccessor = HotSpotStringAccessor.INSTANCE;
                     break initAccessor;
